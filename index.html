@@ -11,16 +11,20 @@
 <body>
 
     <script>
-        fetch('http://localhost:3000/api/users')
-            .then(res => res.json())
-            .then(users => {
-                const list = document.getElementById('user-list');
-                users.forEach(user => {
-                    const item = document.createElement('li');
-                    item.textContent = `${user.name} (${user.email})`;
-                    list.appendChild(item);
-                });
-            });
+        async function getData() {
+            const url = "data.json";
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+
+                const json = await response.json();
+                console.log(json);
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
     </script>
 
 
